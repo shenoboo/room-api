@@ -1,0 +1,25 @@
+### GET request to example server
+GET http://localhost:8080/api/rooms
+
+### Slide 9 - Path Variables
+GET http://localhost:8080/api/rooms/99
+
+### Slide 9 - A Type Mismatch Returns 400
+GET http://localhost:8080/api/abc
+
+### create one
+POST http://localhost:8080/api/rooms
+Content-Type: application/json
+
+{ "name": "Rooftop", "capacity": 12 }
+
+### update one
+PUT http://localhost:8080/api/rooms/1
+Content-Type: application/json
+
+{ "name": "Seminar A+", "capacity": 10 }
+
+### delete one
+DELETE http://localhost:8080/api/rooms/1
+
+###
