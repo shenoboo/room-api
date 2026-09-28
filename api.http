@@ -1,25 +1,47 @@
-### GET request to example server
+### GET all rooms (success)
 GET http://localhost:8080/api/rooms
 
-### Slide 9 - Path Variables
+### GET all rooms with filters (success)
+GET http://localhost:8080/api/rooms?minCapacity=5&keyword=Room
+
+### GET room by ID (success)
+GET http://localhost:8080/api/rooms/1
+
+### GET room by ID (failure - not found 404)
 GET http://localhost:8080/api/rooms/99
 
-### Slide 9 - A Type Mismatch Returns 400
-GET http://localhost:8080/api/abc
-
-### create one
+### POST create room (success)
 POST http://localhost:8080/api/rooms
 Content-Type: application/json
 
-{ "name": "Rooftop", "capacity": 12 }
+{ "name": "New Room", "capacity": 15 }
 
-### update one
-PUT http://localhost:8080/api/rooms/1
+### POST create room (failure - 400 capacity > 20)
+POST http://localhost:8080/api/rooms
 Content-Type: application/json
 
-{ "name": "Seminar A+", "capacity": 10 }
+{ "name": "Big Room", "capacity": 25 }
 
-### delete one
-DELETE http://localhost:8080/api/rooms/1
+### PUT update room (success)
+PUT http://localhost:8080/api/rooms/2
+Content-Type: application/json
 
-###
+{ "name": "Updated Pod", "capacity": 5 }
+
+### PUT update room (failure - 400 capacity < 1)
+PUT http://localhost:8080/api/rooms/2
+Content-Type: application/json
+
+{ "name": "Small Pod", "capacity": 0 }
+
+### PUT update room (failure - not found 404)
+PUT http://localhost:8080/api/rooms/99
+Content-Type: application/json
+
+{ "name": "Missing Room", "capacity": 10 }
+
+### DELETE room (success)
+DELETE http://localhost:8080/api/rooms/3
+
+### DELETE room (failure - not found 404)
+DELETE http://localhost:8080/api/rooms/99
