@@ -24,6 +24,6 @@ SELECT room.name FROM room JOIN reservation ON room.id = reservation.room_id GRO
 
 -- Challenge. Which reservations in room 1 overlap 10:30–11:30 on 6 October 2026?
 SELECT reservation.* FROM reservation JOIN room ON reservation.room_id = room.id 
-WHERE room.name = 'Room 1' 
+WHERE room.id = 1 
 AND reservation.start_time < '2026-10-06 11:30:00' 
 AND reservation.end_time > '2026-10-06 10:30:00';
