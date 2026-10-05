@@ -2,13 +2,13 @@
 SELECT * FROM room WHERE capacity >= 6 ORDER BY capacity DESC;
 
 -- Q2. Every reservation made by Mina.
-SELECT * FROM reservation WHERE name = 'Mina';
+SELECT * FROM reservation WHERE reserved_by = 'Mina';
 
 -- Q3. Every reservation with the name of its room.
 SELECT reservation.*, room.name AS room_name FROM reservation JOIN room ON reservation.room_id = room.id;
 
 -- Q4. Reservations for Seminar A on 6 October 2026.
-SELECT reservation.* FROM reservation JOIN room ON reservation.room_id = room.id WHERE room.name = 'Seminar A' AND reservation.date = '2026-10-06';
+SELECT reservation.* FROM reservation JOIN room ON reservation.room_id = room.id WHERE room.name = 'Seminar A' AND CAST(reservation.start_time AS DATE) = '2026-10-06';
 
 -- Q5. Number of reservations per room (JOIN).
 SELECT room.name, COUNT(reservation.id) AS reservation_count FROM room JOIN reservation ON room.id = reservation.room_id GROUP BY room.id;
@@ -24,5 +24,6 @@ SELECT room.name FROM room JOIN reservation ON room.id = reservation.room_id GRO
 
 -- Challenge. Which reservations in room 1 overlap 10:30–11:30 on 6 October 2026?
 SELECT reservation.* FROM reservation JOIN room ON reservation.room_id = room.id 
-WHERE room.name = 'Room 1' AND reservation.date = '2026-10-06' 
-AND reservation.start_time < '11:30:00' AND reservation.end_time > '10:30:00';
+WHERE room.name = 'Room 1' 
+AND reservation.start_time < '2026-10-06 11:30:00' 
+AND reservation.end_time > '2026-10-06 10:30:00';
